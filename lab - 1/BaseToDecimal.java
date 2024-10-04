@@ -1,3 +1,7 @@
+// Name: Orchlon Chinbat
+// Honor code: I pledge that this submission is solely my work, and that I have neither given, nor received help from anyone.
+// Student ID: xxxxxxxx
+
 import java.util.Scanner;
 
 public class BaseToDecimal {
