@@ -11,28 +11,32 @@ rem     dq      0                 ; remainder
          section .text
          global main
 main:
-        ; calculate the product of the values stored in 'x'
-        movsx   rax, byte [x]         ; move 0-th element of 'x' (byte) to rax
-        movsx   rbx, byte [x + 1]     ; move 1-st element of 'x' (byte) to rbx
-        imul    rax, rbx              ; store the result of multiplying 'rax' and 'rbx' in rax
-        movsx   rbx, byte [x + 2]     ; move 2-nd element of 'x' (byte) to rbx
-        imul    rax, rbx              ; store the result of multiplying 'rax' and 'rbx' in rax
+        ; Move the initial value of x to rax and extend its sign.
+        movsx   rax, byte [x]        ; rax = -2
+        ; Move the second value of x to rax and extend its sign.
+        movsx   rdx, byte [x + 1]    ; rdx = 4
+        imul    rax, rdx             ; rax = rax * rdx (signed multiplication)
+        ; Move the last value of x to rax and extend its sign.
+        movsx   rdx, byte [x + 2]    ; rdx = 5
+        imul    rax, rdx             ; rax = rax * rdx (signed multiplication)
         
-        ; Calculate final division
+                  
+        ; Calculate final division         
         movsx   rcx, byte [y]         ; move 'y' (byte) to rcx
-        cqo                           ; 
+        xor rdx, rdx                  ; zero out rdx before the division
+        cqo                           
         idiv    rcx                   ; divide the value in rax by the value in rcx
-
-        mov     [quot], rax           ; store the quotient in the rax 
-        mov     [rem], rdx            ; store the quotient in the rax
+        mov     [quot], rax           ; Store the value of rax in quot      
+        mov     [rem],  rdx           ; Store the value of rdx in rem 
         
-        cmovg   r8, [quot]        ; If the quotient is negative, move it to r8
-        cmovl   r9, [quot]        ; If the quotient is positive, move it to r9
+        test    rax,    rax           ; Check if rax is zero or negative
+        cmovg   r8,     [quot]        ; if the rax (quot) is positive, move rax to r8
+        cmovl   r9,     [quot]        ; if the rax (quot) is negative, move rax to r9
         
         xor     rax, rax          ; zero out the rax register
-        xor     rbx, rbx          ; zero out the rbx register
         xor     rcx, rcx          ; zero out the rcx register
         xor     rdx, rdx          ; zero out the rdx register
+        xor     r8, r8            ; zero out the r8 register
+        xor     r9, r9            ; zero out the r9 register
         
         ret
-        
