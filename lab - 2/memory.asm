@@ -2,7 +2,7 @@
         segment .data
 a       db      76
 b       dw      76
-c       dd      76
+c       dd      76.1234
 d       dd      20.123
 e       dd      0x172F2
 
