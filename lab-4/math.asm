@@ -1,5 +1,5 @@
 ; Name: Orchlon Chinbat
-; CWU ID: 50291063
+; CWU ID: xxxxxxxx
 ; Honor Code: I pledge that this submission is solely my work, and that I have neither given, nor received help from anyone.
 
                 section .data
