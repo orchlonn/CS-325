@@ -4,7 +4,6 @@
    c   dd  1234
    res dq  0
 
-; (-3 + a) + (b - 14)
         segment .text  
         global  main
 main:
